@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nivesh Saathi — Retail Investor Education MVP</title>
+  <link rel="stylesheet" href="assets/style.css"/>
+</head>
+<body>
+  <header class="app-header">
+    <h1>🪙 Nivesh Saathi <span class="beta">Prototype</span></h1>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="home">Home</button>
+      <button class="tab-btn" data-tab="learn">Learn</button>
+      <button class="tab-btn" data-tab="risk">Risk Profile</button>
+      <button class="tab-btn" data-tab="quiz">Quiz</button>
+      <button class="tab-btn" data-tab="trade">Virtual Trading</button>
+      <button class="tab-btn" data-tab="summarize">Translate & Summarize</button>
+      <button class="tab-btn" data-tab="progress">My Progress</button>
+    </nav>
+    <div class="lang-switch">
+      <label for="langSelect">🌐</label>
+      <select id="langSelect">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="tab active">
+      <h2 data-i18n="home_title">Welcome to Nivesh Saathi</h2>
+      <p data-i18n="home_desc">
+        An interactive learning app for retail investors: tutorials, risk assessment, quizzes, and a safe virtual trading sandbox using delayed market data.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <h3 data-i18n="card_learn_title">Bite-sized Lessons</h3>
+          <p data-i18n="card_learn_desc">Understand market basics, risk, diversification, and the idea of algorithmic trading/HFT.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="card_quiz_title">Practice with Quizzes</h3>
+          <p data-i18n="card_quiz_desc">Reinforce learning and track progress, earn badges on mastery.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="card_trade_title">Virtual Trading</h3>
+          <p data-i18n="card_trade_desc">Try strategies on delayed data with no real money risk.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="card_lang_title">Vernacular First</h3>
+          <p data-i18n="card_lang_desc">Translate & summarize official materials for better access.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="learn" class="tab">
+      <h2 data-i18n="learn_title">Learn</h2>
+      <div class="lesson-list" id="lessonList"></div>
+    </section>
+
+    <section id="risk" class="tab">
+      <h2 data-i18n="risk_title">Risk Profiling</h2>
+      <form id="riskForm" class="stack">
+        <label>
+          <span data-i18n="risk_q1">Investment horizon?</span>
+          <select name="horizon">
+            <option value="1">0–1 years</option>
+            <option value="3">1–3 years</option>
+            <option value="5">3–5 years</option>
+            <option value="10">5+ years</option>
+          </select>
+        </label>
+        <label>
+          <span data-i18n="risk_q2">How do you feel about a 20% drop?</span>
+          <select name="vol">
+            <option value="1" data-i18n="risk_q2_a1">I would sell immediately</option>
+            <option value="2" data-i18n="risk_q2_a2">I would hold</option>
+            <option value="3" data-i18n="risk_q2_a3">I would buy more</option>
+          </select>
+        </label>
+        <label>
+          <span data-i18n="risk_q3">Main goal?</span>
+          <select name="goal">
+            <option value="1" data-i18n="risk_q3_a1">Capital preservation</option>
+            <option value="2" data-i18n="risk_q3_a2">Balanced growth</option>
+            <option value="3" data-i18n="risk_q3_a3">Aggressive growth</option>
+          </select>
+        </label>
+        <button type="submit" class="primary" data-i18n="btn_calc_score">Calculate Score</button>
+      </form>
+      <div id="riskResult" class="result"></div>
+    </section>
+
+    <section id="quiz" class="tab">
+      <h2 data-i18n="quiz_title">Quizzes</h2>
+      <div id="quizContainer"></div>
+      <button id="submitQuiz" class="primary" data-i18n="btn_submit_quiz">Submit Answers</button>
+      <div id="quizResult" class="result"></div>
+    </section>
+
+    <section id="trade" class="tab">
+      <h2 data-i18n="trade_title">Virtual Trading (Delayed Data)</h2>
+      <div class="grid-2">
+        <div>
+          <label>
+            <span data-i18n="trade_symbol">Symbol</span>
+            <select id="symbolSelect"></select>
+          </label>
+          <div id="pricePanel" class="price-panel"></div>
+          <label>
+            <span data-i18n="trade_qty">Quantity</span>
+            <input type="number" id="orderQty" min="1" value="1"/>
+          </label>
+          <div class="row">
+            <button id="buyBtn" class="success" data-i18n="btn_buy">Buy</button>
+            <button id="sellBtn" class="danger" data-i18n="btn_sell">Sell</button>
+          </div>
+        </div>
+        <div>
+          <h3 data-i18n="trade_portfolio">Portfolio</h3>
+          <pre id="portfolioView" class="scroll"></pre>
+          <h3 data-i18n="trade_ledger">Ledger</h3>
+          <pre id="ledgerView" class="scroll"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="summarize" class="tab">
+      <h2 data-i18n="sum_title">Translate & Summarize (Prototype)</h2>
+      <p data-i18n="sum_desc">Paste text from official sources (e.g., SEBI/NISM). This prototype creates a quick summary and attempts simple EN↔HI translation for key terms.</p>
+      <textarea id="sumInput" rows="8" placeholder="Paste content here..."></textarea>
+      <div class="row">
+        <button id="btnSummarize" class="primary" data-i18n="btn_summarize">Summarize</button>
+        <button id="btnTranslate" class="secondary" data-i18n="btn_translate">Translate</button>
+      </div>
+      <h3 data-i18n="sum_output">Output</h3>
+      <pre id="sumOutput" class="scroll"></pre>
+    </section>
+
+    <section id="progress" class="tab">
+      <h2 data-i18n="prog_title">My Progress</h2>
+      <div id="progressView"></div>
+      <button id="resetBtn" class="danger" data-i18n="btn_reset">Reset All Data</button>
+    </section>
+  </main>
+
+  <footer>
+    <small>© 2025 Nivesh Saathi (Prototype for SEBI Hackathon). Educational use only; not investment advice.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
